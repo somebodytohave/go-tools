@@ -3,7 +3,6 @@ package logging
 import (
 	"github.com/sirupsen/logrus"
 	"github.com/sun-wenming/go-tools/file"
-	"github.com/sun-wenming/go-tools/setting"
 	"os"
 )
 
@@ -37,9 +36,6 @@ func Setup() {
 	//- Warn：记录一下，某事又发生了
 	//- Info：提示一切正常
 	//- debug：没问题，就看看堆栈
-	if setting.ServerSetting.RunMode == "release" {
-		logger.Level = logrus.WarnLevel
-	}
 
 	//logger = log.New(F, DefaultPrefix, log.LstdFlags)
 }
