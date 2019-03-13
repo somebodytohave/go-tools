@@ -3,6 +3,7 @@ package logging
 import (
 	"github.com/sirupsen/logrus"
 	"github.com/sun-wenming/go-tools/file"
+	"log"
 	"os"
 )
 
@@ -20,7 +21,7 @@ func Setup() {
 	fileName := getLogFileName()
 	f, err = file.MustOpen(fileName, filePath)
 	if err != nil {
-		logger.Fatalln(err)
+		log.Fatal(err)
 	}
 
 	// 输出到文件中
