@@ -84,7 +84,7 @@ func MustOpen(fileName, filePath string) (*os.File, error) {
 
 	f, err := Open(src+fileName, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0644)
 	if err != nil {
-		return nil, fmt.Errorf("Fail to OpenFile :%v", err)
+		return nil, fmt.Errorf("fail to OpenFile : %v", err)
 	}
 
 	return f, nil
