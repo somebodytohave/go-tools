@@ -8,10 +8,9 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/sun-wenming/go-tools/setting"
 )
 
-var jwtSecret = []byte(setting.AppSetting.JwtSecret)
+var jwtSecret = []byte("JwtSecret")
 
 // Claims 声明
 type Claims struct {
