@@ -1,4 +1,4 @@
-package cmutil
+package swmUtil
 
 import "github.com/sun-wenming/go-tools/e"
 
