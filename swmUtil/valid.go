@@ -3,10 +3,9 @@ package swmUtil
 import (
 	"github.com/go-playground/locales/zh"
 	"github.com/go-playground/universal-translator"
-	"gopkg.in/go-playground/validator.v8"
+	"github.com/sun-wenming/go-tools/logging"
 	"gopkg.in/go-playground/validator.v9"
 	zh_translations "gopkg.in/go-playground/validator.v9/translations/zh"
-	"github.com/sun-wenming/go-tools/logging"
 	"reflect"
 	"strings"
 	"sync"
