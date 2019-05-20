@@ -4,8 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sun-wenming/go-tools/e"
 	"github.com/sun-wenming/go-tools/swmUtil"
-	"github.com/sun-wenming/go-tools/util"
-	"gopkg.in/go-playground/validator.v8"
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
 	"strconv"
