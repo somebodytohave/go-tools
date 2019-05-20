@@ -3,7 +3,9 @@ package swmApp
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sun-wenming/go-tools/e"
+	"github.com/sun-wenming/go-tools/swmUtil"
 	"github.com/sun-wenming/go-tools/util"
+	"gopkg.in/go-playground/validator.v8"
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
 	"strconv"
@@ -82,7 +84,7 @@ func (g *Gin) ResponseFailErrCode(errCode int) {
 //}
 
 // ResponseFailError 返回自定义的错误类型
-func (g *Gin) ResponseFailError(error cmutil.Error) {
+func (g *Gin) ResponseFailError(error swmUtil.Error) {
 	msg := error.Error()
 	MarkError(msg)
 	g.C.JSON(http.StatusOK, gin.H{
@@ -98,7 +100,7 @@ func (g *Gin) ResponseFailValidParam(err error) {
 	errs := err.(validator.ValidationErrors)
 
 	jsonKey := errs[0].Field()
-	fieldName, _ := cmutil.GetTrans().T(jsonKey)
+	fieldName, _ := swmUtil.GetTrans().T(jsonKey)
 	msg := strings.Replace(errs[0].Translate(cmutil.GetTrans()), jsonKey, fieldName, -1)
 	//jsonKey = jsonKey[2 : len(jsonKey)-2]
 	//fmt.Println(jsonKey, ":", msg)

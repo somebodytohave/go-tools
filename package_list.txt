@@ -1,0 +1,15 @@
+go get "github.com/go-playground/locales/zh"
+go get "github.com/go-playground/universal-translator"
+go get "gopkg.in/go-playground/validator.v9"
+go get "gopkg.in/go-playground/validator.v9/translations/zh"
+go get "github.com/Unknwon/com"
+go get "github.com/dgrijalva/jwt-go"
+go get "golang.org/x/oauth2/github"
+go get "golang.org/x/oauth2"
+go get "github.com/sirupsen/logrus"
+go get "github.com/gomodule/redigo/redis"
+go get 
+go get 
+go get 
+go get 
+go get 
