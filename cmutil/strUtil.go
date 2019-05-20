@@ -1,4 +1,4 @@
-package util
+package cmutil
 
 func SetDefaultString(str, defaultStr string) string {
 	if str == "" {

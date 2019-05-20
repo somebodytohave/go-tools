@@ -1,4 +1,4 @@
-package util
+package cmutil
 
 import "github.com/sun-wenming/go-tools/e"
 

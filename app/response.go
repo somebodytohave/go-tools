@@ -82,7 +82,7 @@ func (g *Gin) ResponseFailErrCode(errCode int) {
 //}
 
 // ResponseFailError 返回自定义的错误类型
-func (g *Gin) ResponseFailError(error util.Error) {
+func (g *Gin) ResponseFailError(error cmutil.Error) {
 	msg := error.Error()
 	MarkError(msg)
 	g.C.JSON(http.StatusOK, gin.H{
@@ -98,8 +98,8 @@ func (g *Gin) ResponseFailValidParam(err error) {
 	errs := err.(validator.ValidationErrors)
 
 	jsonKey := errs[0].Field()
-	fieldName, _ := util.GetTrans().T(jsonKey)
-	msg := strings.Replace(errs[0].Translate(util.GetTrans()), jsonKey, fieldName, -1)
+	fieldName, _ := cmutil.GetTrans().T(jsonKey)
+	msg := strings.Replace(errs[0].Translate(cmutil.GetTrans()), jsonKey, fieldName, -1)
 	//jsonKey = jsonKey[2 : len(jsonKey)-2]
 	//fmt.Println(jsonKey, ":", msg)
 

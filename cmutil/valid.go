@@ -1,4 +1,4 @@
-package util
+package cmutil
 
 import (
 	"github.com/go-playground/locales/zh"
