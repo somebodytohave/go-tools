@@ -99,7 +99,7 @@ func (g *Gin) ResponseFailValidParam(err error) {
 
 	jsonKey := errs[0].Field()
 	fieldName, _ := swmUtil.GetTrans().T(jsonKey)
-	msg := strings.Replace(errs[0].Translate(cmutil.GetTrans()), jsonKey, fieldName, -1)
+	msg := strings.Replace(errs[0].Translate(swmUtil.GetTrans()), jsonKey, fieldName, -1)
 	//jsonKey = jsonKey[2 : len(jsonKey)-2]
 	//fmt.Println(jsonKey, ":", msg)
 
