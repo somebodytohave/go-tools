@@ -24,10 +24,10 @@ func GetRandomSalt() string {
 func GetRandomString(length int) string {
 	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	bytes := []byte(str)
-	result := []byte{}
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	var result []byte
+	rand.Seed(time.Now().UnixNano()+ int64(rand.Intn(100)))
 	for i := 0; i < length; i++ {
-		result = append(result, bytes[r.Intn(len(bytes))])
+		result = append(result, bytes[rand.Intn(len(bytes))])
 	}
 	return string(result)
 }
