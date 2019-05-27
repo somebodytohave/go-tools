@@ -3,7 +3,6 @@ package swmUtil
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"github.com/sun-wenming/go-tools/e"
 	"github.com/sun-wenming/go-tools/logging"
 	"time"
 
@@ -59,20 +58,20 @@ func ParseToken2(token string) (*Claims, error) {
 			return claims, nil
 		}
 	}
-	return nil, errors.New(e.GetMsg(e.ErrorAuthParseTokenFail))
+	return nil, errors.New("Token解析失败")
 }
 
 // GetTokenLoginName 根据 token 获取用户登录，用于去数据库获取用户id
-func GetTokenLoginName(c *gin.Context) (string, Error) {
+func GetTokenLoginName(c *gin.Context) (string, error) {
 	claims, err := ParseToken(c)
 	if err != nil {
 		logging.GetLogger().Error(err)
-		return "", ErrNewCode(e.ErrorAuthParseTokenFail)
+		return "", errors.New("Token解析失败")
 	}
 	aesLoginName, err := AesDecrypt(claims.LoginName)
 	if err != nil {
 		logging.GetLogger().Error(err)
-		return "", ErrNewCode(e.ErrorAuthParseTokenFail)
+		return "", errors.New("Token解析失败")
 	}
 	username := string(aesLoginName)
 	return username, nil

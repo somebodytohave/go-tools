@@ -5,7 +5,6 @@ import (
 	"crypto/cipher"
 	"crypto/rand"
 	"errors"
-	"github.com/sun-wenming/go-tools/e"
 	"github.com/sun-wenming/go-tools/logging"
 	"golang.org/x/crypto/bcrypt"
 	"io"
@@ -13,11 +12,11 @@ import (
 
 // Encrypt 加密
 // inputPassword 未加密的密码
-func Encrypt(inputPassword string) (string, Error) {
+func Encrypt(inputPassword string) (string, error) {
 	// Generate "hash" 加密密码
 	hash, err := bcrypt.GenerateFromPassword([]byte(inputPassword), bcrypt.DefaultCost)
 	if err != nil {
-		return "", ErrNewCode(e.ErrorAuthToken)
+		return "", err
 	}
 	// 加密后的密码
 	password := string(hash)

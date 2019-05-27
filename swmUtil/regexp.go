@@ -22,3 +22,4 @@ func RegPhone(phone string) bool {
 func RegUserName(username string) bool {
 	return usernameRegex.MatchString(username)
 }
+

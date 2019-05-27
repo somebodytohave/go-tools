@@ -1,4 +1,4 @@
-package swmApp
+package swmGin
 
 import (
 	"github.com/gin-gonic/gin"
