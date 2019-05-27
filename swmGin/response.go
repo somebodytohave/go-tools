@@ -6,19 +6,12 @@ import (
 	"github.com/sun-wenming/go-tools/swmUtil"
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
-	"strconv"
 	"strings"
 )
 
 // Gin 实体
 type Gin struct {
 	C *gin.Context
-}
-
-type HTTPSuccess struct {
-	Code    int    `json:"code" example:"200"`
-	Message string `json:"msg" example:"ok" `
-	Data    string `json:"data" example:"null"`
 }
 
 // GetGin 获取Gin
@@ -47,39 +40,27 @@ func (g *Gin) ResponseSuc(data interface{}) {
 	return
 }
 
-// ResponseFail 返回失败
-func (g *Gin) ResponseFail() {
+// Response400 返回失败
+func (g *Gin) Response400(err error) {
+	MarkError(err.Error())
+	g.C.JSON(http.StatusOK, gin.H{
+		"code": e.ERROR400,
+		"msg":  err.Error(),
+		"data": nil,
+	})
+	return
+}
+
+// Response500 返回失败
+func (g *Gin) Response500(err error) {
+	MarkError(err.Error())
 	g.C.JSON(http.StatusOK, gin.H{
 		"code": e.ERROR500,
-		"msg":  e.GetMsg(e.ERROR500),
+		"msg":  err.Error(),
 		"data": nil,
 	})
 	return
 }
-
-// ResponseFailErrCode 返回失败
-func (g *Gin) ResponseFailErrCode(errCode int) {
-	errMsg := "code : " + strconv.Itoa(errCode) + "msg : " + e.GetMsg(errCode)
-	MarkError(errMsg)
-
-	g.C.JSON(http.StatusOK, gin.H{
-		"code": errCode,
-		"msg":  e.GetMsg(errCode),
-		"data": nil,
-	})
-	return
-}
-
-// ResponseFailMsg 返回失败
-//func (g *Gin) ResponseFailMsg(msg string) {
-//	MarkError(msg)
-//	g.C.JSON(http.StatusOK, gin.H{
-//		"code": http.StatusBadRequest,
-//		"msg":  msg,
-//		"data": nil,
-//	})
-//	return
-//}
 
 // ResponseFailError 返回自定义的错误类型
 func (g *Gin) ResponseFailError(error swmUtil.Error) {
