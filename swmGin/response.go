@@ -50,8 +50,8 @@ func (g *Gin) ResponseSuc(data interface{}) {
 // ResponseFail 返回失败
 func (g *Gin) ResponseFail() {
 	g.C.JSON(http.StatusOK, gin.H{
-		"code": e.ERROR,
-		"msg":  e.GetMsg(e.ERROR),
+		"code": e.ERROR500,
+		"msg":  e.GetMsg(e.ERROR500),
 		"data": nil,
 	})
 	return
@@ -105,7 +105,7 @@ func (g *Gin) ResponseFailValidParam(err error) {
 
 	MarkError(msg)
 	g.C.JSON(http.StatusOK, gin.H{
-		"code": e.ErrorInvalidParams,
+		"code": e.ERROR400,
 		"msg":  msg,
 		"data": nil,
 	})
