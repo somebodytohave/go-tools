@@ -24,8 +24,9 @@ func Setup() {
 		log.Fatal(err)
 	}
 
+	//logger.SetOutput(os.Stdout)
 	// 输出到文件中
-	logger.Out = f
+	logger.SetOutput(f)
 
 	// If you wish to add the calling method as a field
 	logger.SetReportCaller(true)
