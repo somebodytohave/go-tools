@@ -11,6 +11,7 @@ require (
 	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/leodido/go-urn v1.1.0 // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect
+	github.com/spf13/cast v1.3.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20190517181255-950ef44c6e07 // indirect
 	gopkg.in/go-playground/validator.v9 v9.28.0 // indirect
 )
