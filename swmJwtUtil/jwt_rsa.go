@@ -75,7 +75,7 @@ func ParseRAS256TokenFileName(token string, priKeyName, pubKeyName string) (*Cus
 	if err != nil {
 		return nil, err
 	}
-	return ParseRAS256TokenPubKey(token, publicKey)
+	return ParseRAS256TokenPubKey(token, privateKey, publicKey)
 }
 
 // ParseRAS256TokenFileName 解析token
