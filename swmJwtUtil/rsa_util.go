@@ -1,4 +1,4 @@
-package swmCryptoUtil
+package swmJwtUtil
 
 import (
 	"crypto/rand"
