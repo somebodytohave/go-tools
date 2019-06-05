@@ -6,50 +6,45 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"io/ioutil"
-	"time"
 )
 
 type CustomClaims struct {
-	Data interface{} `json:"data"`
+	Data []byte `json:"data"`
 	jwt.StandardClaims
 }
 
-// GenRSA256TokenWithDay 默认一天保存时间
+// GenRSA256TokenWithFileName
 // filename: 密钥的名称
-func GenRSA256TokenWithDay(claims CustomClaims, filename string) (string, error) {
-	nowTime := time.Now()
-	expireTime := nowTime.Add(24 * time.Hour)
-	claims.ExpiresAt = expireTime.Unix()
+func GenRSA256TokenWithFileName(claims CustomClaims, priKeyName, pubKeyName string) (string, error) {
 	// 私钥
-	key, err := ioutil.ReadFile(filename)
+	priKey, err := ioutil.ReadFile(priKeyName)
 	if err != nil {
 		return "", err
 	}
-	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(key)
+	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(priKey)
 	if err != nil {
 		return "", err
 	}
-	return GenRSA256TokenWithPriKey(claims, privateKey)
+	// 公钥
+	pubKey, err := ioutil.ReadFile(pubKeyName)
+	if err != nil {
+		return "", err
+	}
+	publicKey, err := jwt.ParseRSAPublicKeyFromPEM(pubKey)
+	if err != nil {
+		return "", err
+	}
+	return GenRSA256Token(claims, privateKey, publicKey)
 }
 
-// GenRSA256TokenWithFileName 默认一天保存时间
-// filename: 密钥的名称
-func GenRSA256TokenWithFileName(claims CustomClaims, filename string) (string, error) {
-	// 私钥
-	key, err := ioutil.ReadFile(filename)
+// GenRSA256Token 生成 加密方式 token
+func GenRSA256Token(claims CustomClaims, privateKey *rsa.PrivateKey, publicKey *rsa.PublicKey) (string, error) {
+	bytes, err := EncryptWithPublicKey(claims.Data, publicKey)
 	if err != nil {
 		return "", err
 	}
-	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(key)
-	if err != nil {
-		return "", err
-	}
-	return GenRSA256TokenWithPriKey(claims, privateKey)
-}
 
-// GenRSA256TokenWithPriKey 生成 加密方式 token
-func GenRSA256TokenWithPriKey(claims CustomClaims, privateKey *rsa.PrivateKey) (string, error) {
-	// claims.Issuer = "sun-wenming@secure.istio.io"
+	claims.Data = bytes
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
 	//header := map[string]interface{}{
 	//	"alg": "RS256", "typ": "JWT",
@@ -61,13 +56,22 @@ func GenRSA256TokenWithPriKey(claims CustomClaims, privateKey *rsa.PrivateKey) (
 
 // ParseRAS256TokenFileName
 // filename: 密钥的名称
-func ParseRAS256TokenFileName(token string, filename string) (*CustomClaims, error) {
+func ParseRAS256TokenFileName(token string, priKeyName, pubKeyName string) (*CustomClaims, error) {
 	// 私钥
-	key, err := ioutil.ReadFile(filename)
+	priKey, err := ioutil.ReadFile(priKeyName)
 	if err != nil {
 		return nil, err
 	}
-	publicKey, err := jwt.ParseRSAPublicKeyFromPEM(key)
+	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(priKey)
+	if err != nil {
+		return nil, err
+	}
+	// 公钥
+	pubKey, err := ioutil.ReadFile(pubKeyName)
+	if err != nil {
+		return nil, err
+	}
+	publicKey, err := jwt.ParseRSAPublicKeyFromPEM(pubKey)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +79,7 @@ func ParseRAS256TokenFileName(token string, filename string) (*CustomClaims, err
 }
 
 // ParseRAS256TokenFileName 解析token
-func ParseRAS256TokenPubKey(token string, publicKey *rsa.PublicKey) (*CustomClaims, error) {
+func ParseRAS256TokenPubKey(token string, privateKey *rsa.PrivateKey, publicKey *rsa.PublicKey) (*CustomClaims, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		// Don't forget to validate the alg is what you expect:
 		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
@@ -103,6 +107,12 @@ func ParseRAS256TokenPubKey(token string, publicKey *rsa.PublicKey) (*CustomClai
 	}
 
 	if claims, ok := tokenClaims.Claims.(*CustomClaims); ok {
+		// 解密 数据
+		bytes, err := DecryptWithPrivateKey(claims.Data, privateKey)
+		if err != nil {
+			return nil, err
+		}
+		claims.Data = bytes
 		return claims, nil
 	} else {
 		return nil, errors.New("token Claims is not CustomClaims")
