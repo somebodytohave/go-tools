@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"io/ioutil"
+	"time"
 )
 
 type CustomClaims struct {
@@ -45,6 +46,11 @@ func GenRSA256Token(claims CustomClaims, privateKey *rsa.PrivateKey, publicKey *
 	}
 
 	claims.Data = bytes
+	// 默认 一天过期
+	if claims.ExpiresAt <= 0 {
+		claims.ExpiresAt = time.Now().Add(24 * time.Hour).Unix()
+	}
+
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
 	//header := map[string]interface{}{
 	//	"alg": "RS256", "typ": "JWT",

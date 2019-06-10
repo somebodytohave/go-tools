@@ -2,11 +2,10 @@
  * Genarate rsa keys.
  */
 
-package main
+package swmJwtUtil
 
 import (
 	"fmt"
-	"github.com/sun-wenming/go-tools/swmJwtUtil"
 	"log"
 )
 
@@ -15,14 +14,14 @@ import (
 //openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem
 func main() {
 
-	customClaims := swmJwtUtil.CustomClaims{Data: []byte("abcde")}
+	customClaims := CustomClaims{Data: []byte("abcde")}
 	// TODO 修改私钥公钥 名称
-	token, err := swmJwtUtil.GenRSA256TokenWithFileName(customClaims, "rsa_private_key.pem", "rsa_public_key.pem")
+	token, err := GenRSA256TokenWithFileName(customClaims, "rsa_private_key.pem", "rsa_public_key.pem")
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(token)
-	claims, err := swmJwtUtil.ParseRAS256TokenFileName(token, "rsa_private_key.pem", "rsa_public_key.pem")
+	claims, err := ParseRAS256TokenFileName(token, "rsa_private_key.pem", "rsa_public_key.pem")
 	if err != nil {
 		log.Fatal(err)
 	}

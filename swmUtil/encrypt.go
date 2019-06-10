@@ -5,7 +5,6 @@ import (
 	"crypto/cipher"
 	"crypto/rand"
 	"errors"
-	"github.com/sun-wenming/go-tools/logging"
 	"golang.org/x/crypto/bcrypt"
 	"io"
 )
@@ -26,7 +25,6 @@ func Encrypt(inputPassword string) (string, error) {
 // Compare 比较密码
 func Compare(inputPwd, hashPwd string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hashPwd), []byte(inputPwd))
-	logging.GetLogger().Warn(err)
 	return err
 }
 
