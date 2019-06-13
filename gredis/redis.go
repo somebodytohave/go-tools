@@ -1,117 +1,54 @@
 package gredis
 
 import (
-	"encoding/json"
-	"github.com/gomodule/redigo/redis"
+	"errors"
+	"github.com/go-redis/redis"
 	"time"
 )
 
-// RedisConn 连接池
-var RedisConn *redis.Pool
+// RedisClient 连接池
+var RedisClient *redis.Client
 
 // Setup 初始化连接池
 func Setup(host, password string) error {
+	client := redis.NewClient(&redis.Options{
+		Addr:     host,
+		Password: password, // no password set
+	})
 
-	RedisConn = &redis.Pool{
-		MaxIdle:     30,
-		MaxActive:   30,
-		IdleTimeout: 200,
-		// 提供创建和配置应用程序连接的一个函数
-		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", host)
-			if err != nil {
-				return nil, err
-			}
-			if password != "" {
-				if _, err := c.Do("AUTH", password); err != nil {
-					c.Close()
-					return nil, err
-				}
-			}
-			return c, err
-		},
-		// 可选的应用程序检查健康功能
-		TestOnBorrow: func(c redis.Conn, t time.Time) error {
-			_, err := c.Do("PING")
-			return err
-		},
+	_, err := client.Ping().Result()
+	if err != nil {
+		return err
 	}
-
 	return nil
 }
 
-func Set(key string, data interface{}, time int) error {
-	// 在连接池中获取一个活跃连接
-	conn := RedisConn.Get()
-	defer conn.Close()
-
-	value, err := json.Marshal(data)
-	if err != nil {
-		return err
-	}
-	// 向 Redis 服务器发送命令并返回收到的答复
-	_, err = conn.Do("SET", key, value)
-	if err != nil {
-		return err
-	}
-	// 到期时间
-	_, err = conn.Do("EXPIRE", key, time)
-	if err != nil {
-		return err
-	}
-
-	return nil
+func Set(key string, data interface{}, expTime time.Duration) error {
+	return RedisClient.Set(key, data, expTime).Err()
 }
 
-func Exists(key string) bool {
-	conn := RedisConn.Get()
-	defer conn.Close()
-
-	// 将命令返回转为布尔值
-	exists, err := redis.Bool(conn.Do("EXISTS", key))
+func Exists(keys string) (bool, error) {
+	result, err := RedisClient.Exists(keys).Result()
 	if err != nil {
-		return false
+		return false, err
 	}
-
-	return exists
+	if result < 1 {
+		return false, errors.New("can't find key : " + keys)
+	}
+	return true, nil
 }
 
-func Get(key string) ([]byte, error) {
-	conn := RedisConn.Get()
-	defer conn.Close()
-
-	// 将命令返回转为 Bytes
-	reply, err := redis.Bytes(conn.Do("GET", key))
-	if err != nil {
-		return nil, err
-	}
-
-	return reply, nil
+func Get(key string) (string, error) {
+	return RedisClient.Get(key).Result()
 }
 
-func Delete(key string) (bool, error) {
-	conn := RedisConn.Get()
-	defer conn.Close()
-
-	return redis.Bool(conn.Do("DEL", key))
-}
-
-func LikeDeletes(key string) error {
-	conn := RedisConn.Get()
-	defer conn.Close()
-
-	// 将命令返回转为 []string
-	keys, err := redis.Strings(conn.Do("KEYS", "*"+key+"*"))
+func Delete(keys string) (bool, error) {
+	result, err := RedisClient.Del(keys).Result()
 	if err != nil {
-		return err
+		return false, err
 	}
-
-	for _, key := range keys {
-		_, err = Delete(key)
-		if err != nil {
-			return err
-		}
+	if result < 1 {
+		return false, errors.New("can't find delete key : " + keys)
 	}
-
-	return nil
+	return true, nil
 }

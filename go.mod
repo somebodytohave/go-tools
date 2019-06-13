@@ -7,6 +7,7 @@ require (
 	github.com/gin-gonic/gin v1.4.0 // indirect
 	github.com/go-playground/locales v0.12.1 // indirect
 	github.com/go-playground/universal-translator v0.16.0 // indirect
+	github.com/go-redis/redis v6.15.2+incompatible // indirect
 	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/leodido/go-urn v1.1.0 // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect

@@ -7,7 +7,7 @@ go get "github.com/dgrijalva/jwt-go"
 go get "golang.org/x/oauth2/github"
 go get "golang.org/x/oauth2"
 go get "github.com/sirupsen/logrus"
-go get "github.com/gomodule/redigo/redis"
+go get "github.com/go-redis/redis"
 go get 
 go get 
 go get 
