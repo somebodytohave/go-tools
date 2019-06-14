@@ -27,15 +27,15 @@ func Set(key string, data interface{}, expTime time.Duration) error {
 	return RedisClient.Set(key, data, expTime).Err()
 }
 
-func Exists(keys string) (bool, error) {
+func Exists(keys string) bool {
 	result, err := RedisClient.Exists(keys).Result()
 	if err != nil {
-		return false, err
+		return false
 	}
 	if result < 1 {
-		return false, errors.New("can't find key : " + keys)
+		return false
 	}
-	return true, nil
+	return true
 }
 
 func Get(key string) (string, error) {
