@@ -4,11 +4,9 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/sun-wenming/go-tools/file"
 	"log"
-	"os"
 )
 
 var (
-	f      *os.File
 	logger *logrus.Logger
 )
 
