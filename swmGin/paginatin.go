@@ -5,13 +5,25 @@ import (
 	"github.com/spf13/cast"
 )
 
+const defaultLimit = 20
+
 // GetPage 保证了各接口的page处理是一致的
 func GetPage(c *gin.Context) int {
 	result := 0
 
 	page, _ := cast.ToIntE(c.Param("page"))
 	if page > 0 {
-		result = (page - 1) * 20
+		result = (page - 1) * defaultLimit
+	}
+	return result
+}
+
+// GetPageLimit 保证了各接口的page处理是一致的
+func GetPageLimit(c *gin.Context, limit int) int {
+	result := 0
+	page, _ := cast.ToIntE(c.Param("page"))
+	if page > 0 {
+		result = (page - 1) * limit
 	}
 	return result
 }
