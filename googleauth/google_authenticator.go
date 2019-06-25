@@ -9,6 +9,8 @@ import (
 	"time"
 )
 
+// TODO 实现微信小程序二次验证码
+
 // MakeGoogleAuthenticator 获取key&t对应的验证码
 // key 秘钥
 // t 1970年的秒
