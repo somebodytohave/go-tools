@@ -1,4 +1,4 @@
-package swmUtil
+package swmEncryptUtil
 
 import (
 	"crypto/aes"

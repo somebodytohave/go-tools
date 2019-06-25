@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/sun-wenming/go-tools/logging"
+	"github.com/sun-wenming/go-tools/swmEncryptUtil"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -20,7 +21,7 @@ type Claims struct {
 // GenerateToken 生成 token
 func GenerateToken(loginName string) (string, error) {
 	var err error
-	aesLoginName, err := AesEncrypt([]byte(loginName))
+	aesLoginName, err := swmEncryptUtil.AesEncrypt([]byte(loginName))
 	if err != nil {
 		return "", err
 	}
@@ -68,7 +69,7 @@ func GetTokenLoginName(c *gin.Context) (string, error) {
 		logging.GetLogger().Error(err)
 		return "", errors.New("Token解析失败")
 	}
-	aesLoginName, err := AesDecrypt(claims.LoginName)
+	aesLoginName, err := swmEncryptUtil.AesDecrypt(claims.LoginName)
 	if err != nil {
 		logging.GetLogger().Error(err)
 		return "", errors.New("Token解析失败")

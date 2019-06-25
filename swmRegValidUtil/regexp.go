@@ -1,4 +1,4 @@
-package swmUtil
+package swmRegValidUtil
 
 import (
 	"regexp"

@@ -3,6 +3,7 @@ package swmGin
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sun-wenming/go-tools/e"
+	"github.com/sun-wenming/go-tools/swmRegValidUtil"
 	"github.com/sun-wenming/go-tools/swmUtil"
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
@@ -79,8 +80,8 @@ func (g *Gin) ResponseFailValidParam(err error) {
 	errs := err.(validator.ValidationErrors)
 
 	jsonKey := errs[0].Field()
-	fieldName, _ := swmUtil.GetTrans().T(jsonKey)
-	msg := strings.Replace(errs[0].Translate(swmUtil.GetTrans()), jsonKey, fieldName, -1)
+	fieldName, _ := swmRegValidUtil.GetTrans().T(jsonKey)
+	msg := strings.Replace(errs[0].Translate(swmRegValidUtil.GetTrans()), jsonKey, fieldName, -1)
 	//jsonKey = jsonKey[2 : len(jsonKey)-2]
 	//fmt.Println(jsonKey, ":", msg)
 
