@@ -9,9 +9,9 @@ import (
 func GetPage(c *gin.Context) int {
 	result := 0
 
-	page, _ := cast.ToIntE(c.Query("page"))
+	page, _ := cast.ToIntE(c.Param("page"))
 	if page > 0 {
-		result = (page - 1) * 10
+		result = (page - 1) * 20
 	}
 	return result
 }

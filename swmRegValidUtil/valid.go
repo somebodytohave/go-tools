@@ -66,5 +66,5 @@ func customFieldName() {
 	var errAdd error
 	errAdd = trans.Add("{{username}}", "用户名", false)
 	errAdd = trans.Add("{{password}}", "密码", false)
-	logging.GetLogger().Warn("添加自定义字段翻译失败", errAdd)
+	logging.GetLogger().Warn("添加自定义字段翻译：", errAdd)
 }
