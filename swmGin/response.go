@@ -41,6 +41,17 @@ func (g *Gin) ResponseSuc(data interface{}) {
 	return
 }
 
+// Response400Str 返回自定义字错误内容
+func (g *Gin) Response400Str(errStr string) {
+	MarkError(errStr)
+	g.C.JSON(http.StatusOK, gin.H{
+		"code": e.ERROR400,
+		"msg":  errStr,
+		"data": nil,
+	})
+	return
+}
+
 // Response400 返回失败
 func (g *Gin) Response400(err error) {
 	MarkError(err.Error())
