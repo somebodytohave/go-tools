@@ -1,6 +1,6 @@
 package swmGin
 
-import "github.com/sun-wenming/go-tools/e"
+import "net/http"
 
 // Error 带有错误码 与 错误信息的错误类
 type Error interface {
@@ -15,7 +15,7 @@ func ErrNew(code int, text string) Error {
 
 // ErrNew returns an error that formats as the given text.
 func ErrNewErr(err error) Error {
-	return &errorString{e.ERROR500, err.Error(),}
+	return &errorString{http.StatusInternalServerError, err.Error(),}
 }
 
 // errorString is a trivial implementation of error.
