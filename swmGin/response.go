@@ -2,9 +2,7 @@ package swmGin
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sun-wenming/go-tools/e"
 	"github.com/sun-wenming/go-tools/swmRegValidUtil"
-	"github.com/sun-wenming/go-tools/swmUtil"
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
 	"strings"
@@ -21,10 +19,10 @@ func GetGin(c *gin.Context) Gin {
 }
 
 // Response 返回的数据
-func (g *Gin) Response(httpCode, errCode int, data interface{}) {
+func (g *Gin) Response(httpCode, errCode int, msg string, data interface{}) {
 	g.C.JSON(httpCode, gin.H{
 		"code": httpCode,
-		"msg":  e.GetMsg(errCode),
+		"msg":  msg,
 		"data": data,
 	})
 
@@ -34,8 +32,8 @@ func (g *Gin) Response(httpCode, errCode int, data interface{}) {
 // ResponseSuc 返回成功
 func (g *Gin) ResponseSuc(data interface{}) {
 	g.C.JSON(http.StatusOK, gin.H{
-		"code": e.SUCCESS,
-		"msg":  e.GetMsg(e.SUCCESS),
+		"code": http.StatusOK,
+		"msg":  "ok",
 		"data": data,
 	})
 	return
@@ -56,7 +54,7 @@ func (g *Gin) Response400Str(errStr string) {
 func (g *Gin) Response400(err error) {
 	MarkError(err.Error())
 	g.C.JSON(http.StatusOK, gin.H{
-		"code": e.ERROR400,
+		"code": http.StatusBadRequest,
 		"msg":  err.Error(),
 		"data": nil,
 	})
@@ -67,7 +65,7 @@ func (g *Gin) Response400(err error) {
 func (g *Gin) Response500(err error) {
 	MarkError(err.Error())
 	g.C.JSON(http.StatusOK, gin.H{
-		"code": e.ERROR500,
+		"code": http.StatusInternalServerError,
 		"msg":  err.Error(),
 		"data": nil,
 	})
@@ -75,7 +73,7 @@ func (g *Gin) Response500(err error) {
 }
 
 // ResponseFailError 返回自定义的错误类型
-func (g *Gin) ResponseFailError(error swmUtil.Error) {
+func (g *Gin) ResponseFailError(error Error) {
 	msg := error.Error()
 	MarkError(msg)
 	g.C.JSON(http.StatusOK, gin.H{

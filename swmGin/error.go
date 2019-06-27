@@ -1,4 +1,4 @@
-package swmUtil
+package swmGin
 
 import "github.com/sun-wenming/go-tools/e"
 
