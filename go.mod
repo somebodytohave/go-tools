@@ -9,6 +9,7 @@ require (
 	github.com/go-playground/universal-translator v0.16.0 // indirect
 	github.com/go-redis/redis v6.15.2+incompatible // indirect
 	github.com/gomodule/redigo v2.0.0+incompatible // indirect
+	github.com/jinzhu/now v1.0.0 // indirect
 	github.com/leodido/go-urn v1.1.0 // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/spf13/cast v1.3.0 // indirect
