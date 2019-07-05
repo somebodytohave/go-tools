@@ -1,4 +1,4 @@
-package logging
+package mlog
 
 import (
 	"github.com/sirupsen/logrus"
@@ -43,6 +43,27 @@ func Setup() {
 // GetLogger Logger
 func GetLogger() *logrus.Logger {
 	return logger
+}
+
+func Debugln(args ...interface{}) {
+	logger.Debugln(args)
+}
+
+func Infoln(args ...interface{}) {
+	logger.Infoln(args)
+}
+
+func Warnln(args ...interface{}) {
+	logger.Warnln(args)
+}
+
+func Errorln(args ...interface{}) {
+	logger.Errorln(args)
+
+}
+
+func Fatalln(args ...interface{}) {
+	logger.Fatalln(args)
 }
 
 //func setPrefix(level Level) {

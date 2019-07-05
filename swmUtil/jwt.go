@@ -3,7 +3,7 @@ package swmUtil
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"github.com/sun-wenming/go-tools/logging"
+	"github.com/sun-wenming/go-tools/mlog"
 	"github.com/sun-wenming/go-tools/swmEncryptUtil"
 	"time"
 
@@ -66,12 +66,12 @@ func ParseToken2(token string) (*Claims, error) {
 func GetTokenLoginName(c *gin.Context) (string, error) {
 	claims, err := ParseToken(c)
 	if err != nil {
-		logging.GetLogger().Error(err)
+		mlog.GetLogger().Error(err)
 		return "", errors.New("Token解析失败")
 	}
 	aesLoginName, err := swmEncryptUtil.AesDecrypt(claims.LoginName)
 	if err != nil {
-		logging.GetLogger().Error(err)
+		mlog.GetLogger().Error(err)
 		return "", errors.New("Token解析失败")
 	}
 	username := string(aesLoginName)

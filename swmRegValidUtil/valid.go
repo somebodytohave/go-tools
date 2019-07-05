@@ -3,7 +3,7 @@ package swmRegValidUtil
 import (
 	"github.com/go-playground/locales/zh"
 	"github.com/go-playground/universal-translator"
-	"github.com/sun-wenming/go-tools/logging"
+	"github.com/sun-wenming/go-tools/mlog"
 	"gopkg.in/go-playground/validator.v9"
 	zh_translations "gopkg.in/go-playground/validator.v9/translations/zh"
 	"reflect"
@@ -66,5 +66,5 @@ func customFieldName() {
 	var errAdd error
 	errAdd = trans.Add("{{username}}", "用户名", false)
 	errAdd = trans.Add("{{password}}", "密码", false)
-	logging.GetLogger().Warn("添加自定义字段翻译：", errAdd)
+	mlog.GetLogger().Warn("添加自定义字段翻译：", errAdd)
 }
