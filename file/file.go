@@ -11,7 +11,6 @@ import (
 // GetSize 获取文件大小
 func GetSize(f multipart.File) (int, error) {
 	content, err := ioutil.ReadAll(f)
-
 	return len(content), err
 }
 
@@ -30,7 +29,6 @@ func CheckNotExist(src string) bool {
 // CheckPermission 检查文件权限
 func CheckPermission(src string) bool {
 	_, err := os.Stat(src)
-
 	return os.IsPermission(err)
 }
 
