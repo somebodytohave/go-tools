@@ -2,6 +2,7 @@ package mGin
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/sun-wenming/go-tools/e"
 	"github.com/sun-wenming/go-tools/mRegValidUtil"
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
