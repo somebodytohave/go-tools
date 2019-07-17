@@ -17,7 +17,7 @@ func Setup() {
 	//You could set this to any `io.Writer` such as a mFile
 	filePath := getLogFilePath()
 	fileName := getLogFileName()
-	f, err = mFile.MustOpen(fileName, filePath)
+	f, err := mFile.MustOpen(fileName, filePath)
 	if err != nil {
 		log.Fatal(err)
 	}
