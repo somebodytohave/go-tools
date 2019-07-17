@@ -8,7 +8,7 @@ go get "golang.org/x/oauth2/github"
 go get "golang.org/x/oauth2"
 go get "github.com/sirupsen/logrus"
 go get "github.com/go-redis/redis"
-go get 
+go get "github.com/boombuler/barcode"
 go get 
 go get 
 go get 
