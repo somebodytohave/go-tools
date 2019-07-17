@@ -3,7 +3,7 @@
 package googleauth
 
 
-//var key = swmRandomUtil.GetRandomBase32String(16)
+//var key = mRandomUtil.GetRandomBase32String(16)
 //fmt.Println(key)
 //data, e := googleauth.MakeGoogleAuthenticatorForNow(key)
 //fmt.Println(data)
