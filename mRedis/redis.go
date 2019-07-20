@@ -9,7 +9,7 @@ var RedisClient *redis.Client
 
 // Setup 初始化连接池
 func Setup(host, password string) error {
-	RedisClient := redis.NewClient(&redis.Options{
+	RedisClient = redis.NewClient(&redis.Options{
 		Addr:     host,
 		Password: password, // no password set
 	})
