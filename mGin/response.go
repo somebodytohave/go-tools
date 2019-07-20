@@ -2,7 +2,7 @@ package mGin
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sun-wenming/go-tools/e"
+	"github.com/sun-wenming/go-tools/mCode"
 	"github.com/sun-wenming/go-tools/mRegValidUtil"
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
@@ -55,7 +55,7 @@ func (g *Gin) Response400(err error) {
 func (g *Gin) Response400Str(errStr string) {
 	MarkError(errStr)
 	g.C.JSON(http.StatusOK, gin.H{
-		"code": e.ERROR400,
+		"code": mCode.ERROR400,
 		"msg":  errStr,
 		"data": nil,
 	})
@@ -97,7 +97,7 @@ func (g *Gin) ResponseFailValidParam(err error) {
 
 	MarkError(msg)
 	g.C.JSON(http.StatusOK, gin.H{
-		"code": e.ERROR400,
+		"code": mCode.ERROR400,
 		"msg":  msg,
 		"data": nil,
 	})

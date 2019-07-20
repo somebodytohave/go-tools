@@ -2,7 +2,7 @@ package mUploadUtil
 
 import (
 	"fmt"
-	"github.com/sun-wenming/go-tools/constant"
+	"github.com/sun-wenming/go-tools/mConstant"
 	"github.com/sun-wenming/go-tools/mFile"
 	"mime/multipart"
 	"os"
@@ -31,12 +31,12 @@ func GetImageName(name string) string {
 
 // GetImagePath 获取图片路径
 func GetImagePath() string {
-	return constant.ImageSavePath
+	return mConstant.ImageSavePath
 }
 
 // GetImageFullPath 获取图片全路径
 func GetImageFullPath() string {
-	return constant.RuntimeRootPath + constant.ImageSavePath
+	return mConstant.RuntimeRootPath + mConstant.ImageSavePath
 }
 
 // CheckImageExt 检查图片后缀

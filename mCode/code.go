@@ -1,4 +1,4 @@
-package e
+package mCode
 
 const (
 	SUCCESS  = 200

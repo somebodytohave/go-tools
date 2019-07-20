@@ -3,7 +3,7 @@ package mQrcode
 import (
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
-	"github.com/sun-wenming/go-tools/constant"
+	"github.com/sun-wenming/go-tools/mConstant"
 	"github.com/sun-wenming/go-tools/mFile"
 	"image/jpeg"
 	"time"
@@ -93,5 +93,5 @@ func GetQrCodePath() string {
 }
 
 func GetQrCodeFullPath() string {
-	return constant.RuntimeRootPath + GetQrCodePath()
+	return mConstant.RuntimeRootPath + GetQrCodePath()
 }
