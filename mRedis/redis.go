@@ -1,4 +1,4 @@
-package mGredis
+package mRedis
 
 import (
 	"errors"
@@ -11,12 +11,12 @@ var RedisClient *redis.Client
 
 // Setup 初始化连接池
 func Setup(host, password string) error {
-	client := redis.NewClient(&redis.Options{
+	RedisClient := redis.NewClient(&redis.Options{
 		Addr:     host,
 		Password: password, // no password set
 	})
 
-	_, err := client.Ping().Result()
+	_, err := RedisClient.Ping().Result()
 	if err != nil {
 		return err
 	}
