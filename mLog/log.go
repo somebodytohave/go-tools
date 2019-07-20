@@ -7,12 +7,15 @@ import (
 )
 
 var (
-	logger *logrus.Logger
+	logger  *logrus.Logger
+	InitLog bool
 )
 
 func Setup() {
 	// Create a new instance of the logger. You can have any number of instances.
 	logger = logrus.New()
+	InitLog = true
+	
 	var err error
 	//You could set this to any `io.Writer` such as a mFile
 	filePath := getLogFilePath()

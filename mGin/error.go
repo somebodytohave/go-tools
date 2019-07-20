@@ -1,7 +1,5 @@
 package mGin
 
-import "net/http"
-
 // Error 带有错误码 与 错误信息的错误类
 type Error interface {
 	error
@@ -11,11 +9,6 @@ type Error interface {
 // ErrNew returns an error that formats as the given text.
 func ErrNew(code int, text string) Error {
 	return &errorString{code, text}
-}
-
-// ErrNew returns an error that formats as the given text.
-func ErrNewErr(err error) Error {
-	return &errorString{http.StatusInternalServerError, err.Error(),}
 }
 
 // errorString is a trivial implementation of error.

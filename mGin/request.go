@@ -6,6 +6,8 @@ import (
 
 // MarkError 将错误 存入日志
 func MarkError(v ...interface{}) {
-	mLog.GetLogger().Error(v...)
+	if mLog.InitLog {
+		mLog.Errorln(v...)
+	}
 	return
 }

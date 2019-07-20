@@ -19,10 +19,10 @@ func GetGin(c *gin.Context) Gin {
 	return Gin{c}
 }
 
-// Response 返回的数据
+// Response
 func (g *Gin) Response(httpCode, errCode int, msg string, data interface{}) {
 	g.C.JSON(httpCode, gin.H{
-		"code": httpCode,
+		"code": errCode,
 		"msg":  msg,
 		"data": data,
 	})
@@ -40,23 +40,23 @@ func (g *Gin) ResponseSuc(data interface{}) {
 	return
 }
 
-// Response400Str 返回自定义字错误内容
-func (g *Gin) Response400Str(errStr string) {
-	MarkError(errStr)
-	g.C.JSON(http.StatusOK, gin.H{
-		"code": e.ERROR400,
-		"msg":  errStr,
-		"data": nil,
-	})
-	return
-}
-
 // Response400 返回失败
 func (g *Gin) Response400(err error) {
 	MarkError(err.Error())
 	g.C.JSON(http.StatusOK, gin.H{
 		"code": http.StatusBadRequest,
 		"msg":  err.Error(),
+		"data": nil,
+	})
+	return
+}
+
+// Response400Str 返回自定义字错误内容
+func (g *Gin) Response400Str(errStr string) {
+	MarkError(errStr)
+	g.C.JSON(http.StatusOK, gin.H{
+		"code": e.ERROR400,
+		"msg":  errStr,
 		"data": nil,
 	})
 	return
@@ -73,8 +73,8 @@ func (g *Gin) Response500(err error) {
 	return
 }
 
-// ResponseFailError 返回自定义的错误类型
-func (g *Gin) ResponseFailError(error Error) {
+// ResponseFailError 返回自定义的错误码
+func (g *Gin) ResponseCodeError(error Error) {
 	msg := error.Error()
 	MarkError(msg)
 	g.C.JSON(http.StatusOK, gin.H{
