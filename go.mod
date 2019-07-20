@@ -3,6 +3,7 @@ module github.com/sun-wenming/go-tools
 go 1.12
 
 require (
+	github.com/Unknwon/com v0.0.0-20190321035513-0fed4efef755
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/gin-gonic/gin v1.4.0 // indirect
 	github.com/go-playground/locales v0.12.1 // indirect

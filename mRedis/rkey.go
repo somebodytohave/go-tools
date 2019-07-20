@@ -42,3 +42,11 @@ func DeleteKeys(keys ...string) (bool, error) {
 	}
 	return true, nil
 }
+
+// 以秒为单位返回 key 的剩余过期时间。
+// 当 key 不存在时，返回 -2000000000 。
+// 当 key 存在但没有设置剩余生存时间时，返回 -1000000000 。
+// 否则，以秒为单位，返回 key 的剩余生存时间。
+func TtlKey(key string) (time.Duration, error) {
+	return RedisClient.TTL(key).Result()
+}
