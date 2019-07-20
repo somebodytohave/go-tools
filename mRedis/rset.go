@@ -2,7 +2,7 @@ package mRedis
 
 // 将一个或多个成员元素加入到集合中，已经存在于集合的成员元素将被忽略
 func SetSet(key string, members ...interface{}) error {
-	return RedisClient.SAdd(key, members).Err()
+	return RedisClient.SAdd(key, members...).Err()
 }
 
 // 获取集合所有值
