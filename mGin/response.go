@@ -88,13 +88,19 @@ func (g *Gin) ResponseCodeError(error Error) {
 // ResponseFailValidParam 验证参数错误
 func (g *Gin) ResponseFailValidParam(err error) {
 	errs := err.(validator.ValidationErrors)
+
+	// 无翻译字段的错误消息
+	msg := errs[0].Translate(mRegValidUtil.GetTrans())
+
+	// 获取 自定义的 validate.RegisterTagNameFunc
 	jsonKey := errs[0].Field()
 	// 自定义 customFieldName 需要去 valid.go 自行添加key 与 value
 	fieldName, err := mRegValidUtil.GetTrans().T(jsonKey)
-	if err != nil {
-		fieldName = errs[0].StructField()
+	// 替换字段
+	if err == nil {
+		msg = strings.Replace(msg, jsonKey, fieldName, -1)
 	}
-	msg := strings.Replace(errs[0].Translate(mRegValidUtil.GetTrans()), jsonKey, fieldName, -1)
+
 	//jsonKey = jsonKey[2 : len(jsonKey)-2]
 	//fmt.Println(jsonKey, ":", msg)
 

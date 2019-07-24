@@ -34,7 +34,7 @@ func GetValidate() *validator.Validate {
 			if name == "-" {
 				return ""
 			}
-			return "{{" + name + "}}"
+			return "{{ " + name + " }}"
 		})
 
 		zh_translations.RegisterDefaultTranslations(validate, trans)
