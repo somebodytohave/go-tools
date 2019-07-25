@@ -34,7 +34,7 @@ func GetValidate() *validator.Validate {
 			if name == "-" {
 				return ""
 			}
-			return "{{" + name + "}}"
+			return "{{ " + name + " }}"
 		})
 
 		zh_translations.RegisterDefaultTranslations(validate, trans)
@@ -66,5 +66,4 @@ func customFieldName() {
 	var errAdd error
 	errAdd = trans.Add("{{username}}", "用户名", false)
 	errAdd = trans.Add("{{password}}", "密码", false)
-	mLog.GetLogger().Warn("添加自定义字段翻译：", errAdd)
 }
