@@ -5,21 +5,23 @@ import (
 )
 
 const (
-	regPhone    = "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$"
-	regEmail    = "^([A-Za-z0-9_\\-\\.])+\\@([A-Za-z0-9_\\-\\.])+\\.([A-Za-z]{2,4})$"
-	regUserName = "^([A-Za-z_])+\\w"
+	RegexPhone    = "^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$"
+	RegexEmail    = "^([A-Za-z0-9_\\-\\.])+\\@([A-Za-z0-9_\\-\\.])+\\.([A-Za-z]{2,4})$"
+	RegexUserName = "^([A-Za-z_])+\\w"
 )
 
 var (
-	phoneRegex    = regexp.MustCompile(regPhone)
-	usernameRegex = regexp.MustCompile(regUserName)
+	PhoneRegex    = regexp.MustCompile(RegexPhone)
+	UsernameRegex = regexp.MustCompile(RegexUserName)
 )
 
+// 检查手机号
 func RegPhone(phone string) bool {
-	return phoneRegex.MatchString(phone)
+	return PhoneRegex.MatchString(phone)
 }
 
+// 检查用户名
 func RegUserName(username string) bool {
-	return usernameRegex.MatchString(username)
+	return UsernameRegex.MatchString(username)
 }
 

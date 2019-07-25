@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// 处理跨域请求,支持options访问
+// Gin 中间件 处理跨域请求,支持options访问
 func Cors() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method               //请求方法

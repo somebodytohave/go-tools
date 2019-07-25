@@ -38,7 +38,7 @@ func GenRSA256TokenWithFileName(claims CustomClaims, priKeyName, pubKeyName stri
 	return GenRSA256Token(claims, privateKey, publicKey)
 }
 
-// GenRSA256Token 生成 加密方式 token
+// GenRSA256Token 生成 加密方式token
 func GenRSA256Token(claims CustomClaims, privateKey *rsa.PrivateKey, publicKey *rsa.PublicKey) (string, error) {
 	bytes, err := EncryptWithPublicKey(claims.Data, publicKey)
 	if err != nil {

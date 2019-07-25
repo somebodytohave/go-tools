@@ -59,7 +59,6 @@ func ValidEmail(email string) bool {
 	return true
 }
 
-
 // 自定义字段名称
 // 参考自 : https://github.com/syssam/go-playground-sample/blob/master/main.go
 func customFieldName() {
