@@ -3,6 +3,7 @@ package mGin
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sun-wenming/go-tools/mCode"
+	"github.com/sun-wenming/go-tools/mLog"
 	"github.com/sun-wenming/go-tools/mRegValidUtil"
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
@@ -101,5 +102,14 @@ func (g *Gin) ResponseFailValidParam(err error) {
 		"msg":  msg,
 		"data": nil,
 	})
+	return
+}
+
+
+// MarkError 将错误 存入日志
+func MarkError(v ...interface{}) {
+	if mLog.InitLog {
+		mLog.Errorln(v...)
+	}
 	return
 }
