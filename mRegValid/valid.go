@@ -3,7 +3,6 @@ package mRegValid
 import (
 	"github.com/go-playground/locales/zh"
 	"github.com/go-playground/universal-translator"
-	"github.com/sun-wenming/go-tools/mLog"
 	"gopkg.in/go-playground/validator.v9"
 	zh_translations "gopkg.in/go-playground/validator.v9/translations/zh"
 	"reflect"
@@ -42,7 +41,6 @@ func GetValidate() *validator.Validate {
 	})
 	return validate
 }
-
 
 // GetTrans 获取翻译
 func GetTrans() ut.Translator {
