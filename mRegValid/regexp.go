@@ -1,4 +1,4 @@
-package mRegValidUtil
+package mRegValid
 
 import (
 	"regexp"

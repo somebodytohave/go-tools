@@ -1,4 +1,4 @@
-package mEncryptUtil
+package mEncrypt
 
 import (
 	"crypto/aes"

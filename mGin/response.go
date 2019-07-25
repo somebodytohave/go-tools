@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sun-wenming/go-tools/mCode"
 	"github.com/sun-wenming/go-tools/mLog"
-	"github.com/sun-wenming/go-tools/mRegValidUtil"
+	"github.com/sun-wenming/go-tools/mRegValid"
 	"gopkg.in/go-playground/validator.v9"
 	"net/http"
 	"strings"
@@ -91,12 +91,12 @@ func (g *Gin) ResponseFailValidParam(err error) {
 	errs := err.(validator.ValidationErrors)
 
 	// 无翻译字段的错误消息
-	msg := errs[0].Translate(mRegValidUtil.GetTrans())
+	msg := errs[0].Translate(mRegValid.GetTrans())
 
 	// 获取 自定义的 validate.RegisterTagNameFunc
 	jsonKey := errs[0].Field()
 	// 自定义 customFieldName 需要去 valid.go 自行添加key 与 value
-	fieldName, err := mRegValidUtil.GetTrans().T(jsonKey)
+	fieldName, err := mRegValid.GetTrans().T(jsonKey)
 	// 替换字段
 	if err == nil {
 		msg = strings.Replace(msg, jsonKey, fieldName, -1)

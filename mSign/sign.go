@@ -1,9 +1,9 @@
-package mSignUtil
+package mSign
 
 import (
 	"crypto/sha1"
 	"encoding/hex"
-	"github.com/sun-wenming/go-tools/mRandomUtil"
+	"github.com/sun-wenming/go-tools/mRandom"
 )
 
 ////将参数进行字典序排序
@@ -22,5 +22,5 @@ func SignSha1(sha1String string) string {
 }
 
 func SignBase32(len int) string {
-	return mRandomUtil.GetRandomBase32String(len)
+	return mRandom.GetRandomBase32String(len)
 }

@@ -1,4 +1,4 @@
-package googleauth
+package mGoogleauth
 
 import (
 	"crypto/hmac"

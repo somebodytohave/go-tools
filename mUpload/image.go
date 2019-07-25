@@ -1,4 +1,4 @@
-package mUploadUtil
+package mUpload
 
 import (
 	"fmt"

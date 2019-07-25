@@ -2,7 +2,7 @@
  * Genarate rsa keys.
  */
 
-package mJwtUtil
+package mJwt
 
 import (
 	"fmt"

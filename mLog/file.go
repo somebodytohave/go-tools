@@ -12,10 +12,12 @@ var (
 	TimeFormat  = "20060102"
 )
 
+// 获取日志的存放目录
 func getLogFilePath() string {
 	return fmt.Sprintf("%s", LogSavePath)
 }
 
+// 默认为 log20060102.log
 func getLogFileName() string {
 	return fmt.Sprintf("%s%s.%s",
 		LogSaveName,

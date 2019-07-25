@@ -1,4 +1,4 @@
-package mRegValidUtil
+package mRegValid
 
 import (
 	"github.com/go-playground/locales/zh"

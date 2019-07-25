@@ -1,4 +1,4 @@
-package mJwtUtil
+package mJwt
 
 import (
 	"crypto/rsa"

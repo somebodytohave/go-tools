@@ -1,4 +1,4 @@
-package mTimeUtil
+package mTime
 
 import (
 	"github.com/jinzhu/now"
@@ -15,7 +15,7 @@ func GetTimeStamp() int64 {
 	return time.Now().Unix()
 }
 
-// GetMonthDiff 获取当前月份的
+// GetMonthDiff 获取当前月份的开始与结束 时间戳
 func GetMonthDiff(date string) (int64, int64, error) {
 	parseTime, err := now.Parse(date)
 	if err != nil {
