@@ -79,6 +79,19 @@ func ParseRAS256TokenByFile(token string, priKeyFile, pubKeyFile string) (*Custo
 	return ParseRAS256TokenByKey(token, privateKey, publicKey)
 }
 
+// ParseRAS256TokenByFilePwd
+func ParseRAS256TokenByFilePwd(token string, priKeyFile, pubKeyFile, keyPwd string) (*CustomClaims, error) {
+	privateKey, err := GetPriKeyPwd(priKeyFile, keyPwd)
+	if err != nil {
+		return nil, err
+	}
+	publicKey, err := GetPubKey(pubKeyFile)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRAS256TokenByKey(token, privateKey, publicKey)
+}
+
 // ParseRAS256TokenByKey 解析token
 func ParseRAS256TokenByKey(token string, privateKey *rsa.PrivateKey, publicKey *rsa.PublicKey) (*CustomClaims, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
@@ -120,8 +133,6 @@ func ParseRAS256TokenByKey(token string, privateKey *rsa.PrivateKey, publicKey *
 	}
 }
 
-
-
 // 获取私钥
 func GetPriKey(priKeyFile string) (*rsa.PrivateKey, error) {
 	priKey, err := ioutil.ReadFile(priKeyFile)
@@ -135,7 +146,7 @@ func GetPriKey(priKeyFile string) (*rsa.PrivateKey, error) {
 	return privateKey, nil
 }
 
-// 获取私钥 带密码的
+// 获取 加密码的私钥
 func GetPriKeyPwd(priKeyFile, pwd string) (*rsa.PrivateKey, error) {
 	priKey, err := ioutil.ReadFile(priKeyFile)
 	if err != nil {
@@ -160,4 +171,3 @@ func GetPubKey(pubKeyFile string) (*rsa.PublicKey, error) {
 	}
 	return publicKey, nil
 }
-
