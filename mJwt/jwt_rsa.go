@@ -14,31 +14,37 @@ type CustomClaims struct {
 	jwt.StandardClaims
 }
 
-// GenRSA256TokenWithFileName
-// filename: 密钥的名称
-func GenRSA256TokenWithFileName(claims CustomClaims, priKeyName, pubKeyName string) (string, error) {
+// GenRSA256TokenByFile
+func GenRSA256TokenByFile(claims CustomClaims, priKeyFile, pubKeyFile string) (string, error) {
 	// 私钥
-	priKey, err := ioutil.ReadFile(priKeyName)
-	if err != nil {
-		return "", err
-	}
-	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(priKey)
+	privateKey, err := GetPriKey(priKeyFile)
 	if err != nil {
 		return "", err
 	}
 	// 公钥
-	pubKey, err := ioutil.ReadFile(pubKeyName)
-	if err != nil {
-		return "", err
-	}
-	publicKey, err := jwt.ParseRSAPublicKeyFromPEM(pubKey)
+	publicKey, err := GetPubKey(pubKeyFile)
 	if err != nil {
 		return "", err
 	}
 	return GenRSA256Token(claims, privateKey, publicKey)
 }
 
-// GenRSA256Token 生成 加密方式token
+// GenRSA256TokenByFilePwd
+func GenRSA256TokenByFilePwd(claims CustomClaims, priKeyFile, pubKeyFile, keyPwd string) (string, error) {
+	// 私钥
+	privateKey, err := GetPriKeyPwd(priKeyFile, keyPwd)
+	if err != nil {
+		return "", err
+	}
+	// 公钥
+	publicKey, err := GetPubKey(pubKeyFile)
+	if err != nil {
+		return "", err
+	}
+	return GenRSA256Token(claims, privateKey, publicKey)
+}
+
+// GenRSA256Token 生成 密钥对加密的 token
 func GenRSA256Token(claims CustomClaims, privateKey *rsa.PrivateKey, publicKey *rsa.PublicKey) (string, error) {
 	bytes, err := EncryptWithPublicKey(claims.Data, publicKey)
 	if err != nil {
@@ -60,32 +66,21 @@ func GenRSA256Token(claims CustomClaims, privateKey *rsa.PrivateKey, publicKey *
 	return tokenClaims.SignedString(privateKey)
 }
 
-// ParseRAS256TokenFileName
-// filename: 密钥的名称
-func ParseRAS256TokenFileName(token string, priKeyName, pubKeyName string) (*CustomClaims, error) {
-	// 私钥
-	priKey, err := ioutil.ReadFile(priKeyName)
+// ParseRAS256TokenByFile
+func ParseRAS256TokenByFile(token string, priKeyFile, pubKeyFile string) (*CustomClaims, error) {
+	privateKey, err := GetPriKey(priKeyFile)
 	if err != nil {
 		return nil, err
 	}
-	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(priKey)
+	publicKey, err := GetPubKey(pubKeyFile)
 	if err != nil {
 		return nil, err
 	}
-	// 公钥
-	pubKey, err := ioutil.ReadFile(pubKeyName)
-	if err != nil {
-		return nil, err
-	}
-	publicKey, err := jwt.ParseRSAPublicKeyFromPEM(pubKey)
-	if err != nil {
-		return nil, err
-	}
-	return ParseRAS256TokenPubKey(token, privateKey, publicKey)
+	return ParseRAS256TokenByKey(token, privateKey, publicKey)
 }
 
-// ParseRAS256TokenFileName 解析token
-func ParseRAS256TokenPubKey(token string, privateKey *rsa.PrivateKey, publicKey *rsa.PublicKey) (*CustomClaims, error) {
+// ParseRAS256TokenByKey 解析token
+func ParseRAS256TokenByKey(token string, privateKey *rsa.PrivateKey, publicKey *rsa.PublicKey) (*CustomClaims, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		// Don't forget to validate the alg is what you expect:
 		if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
@@ -124,3 +119,45 @@ func ParseRAS256TokenPubKey(token string, privateKey *rsa.PrivateKey, publicKey 
 		return nil, errors.New("token Claims is not CustomClaims")
 	}
 }
+
+
+
+// 获取私钥
+func GetPriKey(priKeyFile string) (*rsa.PrivateKey, error) {
+	priKey, err := ioutil.ReadFile(priKeyFile)
+	if err != nil {
+		return nil, err
+	}
+	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(priKey)
+	if err != nil {
+		return nil, err
+	}
+	return privateKey, nil
+}
+
+// 获取私钥 带密码的
+func GetPriKeyPwd(priKeyFile, pwd string) (*rsa.PrivateKey, error) {
+	priKey, err := ioutil.ReadFile(priKeyFile)
+	if err != nil {
+		return nil, err
+	}
+	privateKey, err := jwt.ParseRSAPrivateKeyFromPEMWithPassword(priKey, pwd)
+	if err != nil {
+		return nil, err
+	}
+	return privateKey, nil
+}
+
+// 获取公钥
+func GetPubKey(pubKeyFile string) (*rsa.PublicKey, error) {
+	pubKey, err := ioutil.ReadFile(pubKeyFile)
+	if err != nil {
+		return nil, err
+	}
+	publicKey, err := jwt.ParseRSAPublicKeyFromPEM(pubKey)
+	if err != nil {
+		return nil, err
+	}
+	return publicKey, nil
+}
+
