@@ -41,6 +41,17 @@ func (g *Gin) ResponseSuc(data interface{}) {
 	return
 }
 
+// ResponseSucNoData 返回成功
+func (g *Gin) ResponseSucNoData() {
+	g.C.JSON(http.StatusOK, gin.H{
+		"code": http.StatusOK,
+		"msg":  "ok",
+		"data": "",
+	})
+	return
+}
+
+
 // Response400 返回失败
 func (g *Gin) Response400(err error) {
 	MarkError(err.Error())
