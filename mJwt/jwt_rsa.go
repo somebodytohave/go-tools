@@ -11,6 +11,7 @@ import (
 
 type CustomClaims struct {
 	Data []byte `json:"data"`
+	ExtraData []byte `json:"extra_data"`
 	jwt.StandardClaims
 }
 
@@ -50,8 +51,13 @@ func GenRSA256Token(claims CustomClaims, privateKey *rsa.PrivateKey, publicKey *
 	if err != nil {
 		return "", err
 	}
+	extraDataBytes, err := EncryptWithPublicKey(claims.ExtraData, publicKey)
+	if err != nil {
+		return "", err
+	}
 
 	claims.Data = bytes
+	claims.ExtraData = extraDataBytes
 	// 默认 一天过期
 	if claims.ExpiresAt <= 0 {
 		claims.ExpiresAt = time.Now().Add(24 * time.Hour).Unix()
@@ -126,7 +132,13 @@ func ParseRAS256TokenByKey(token string, privateKey *rsa.PrivateKey, publicKey *
 		if err != nil {
 			return nil, err
 		}
+		// 解密 数据
+		extraDataBytes, err := DecryptWithPrivateKey(claims.ExtraData, privateKey)
+		if err != nil {
+			return nil, err
+		}
 		claims.Data = bytes
+		claims.ExtraData = extraDataBytes
 		return claims, nil
 	} else {
 		return nil, errors.New("token Claims is not CustomClaims")
