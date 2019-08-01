@@ -7,14 +7,14 @@ import (
 )
 
 var (
-	logger  *logrus.Logger
+	Logger  *logrus.Logger
 	InitLog bool
 )
 
 // 初始化日志配置
 func Setup() {
-	// Create a new instance of the logger. You can have any number of instances.
-	logger = logrus.New()
+	// Create a new instance of the Logger. You can have any number of instances.
+	Logger = logrus.New()
 	InitLog = true
 
 	var err error
@@ -28,46 +28,48 @@ func Setup() {
 	}
 
 	// 输出到控制台
-	//logger.SetOutput(os.Stdout)
+	//Logger.SetOutput(os.Stdout)
 	// 输出到文件中
-	logger.SetOutput(f)
+	Logger.SetOutput(f)
+
+	// TODO 增加 example_custom_caller_test https://github.com/sirupsen/logrus/blob/master/example_custom_caller_test.go
 
 	// If you wish to add the calling method as a field
-	logger.SetReportCaller(true)
+	Logger.SetReportCaller(true)
 
-	//logger.Formatter = new(logrus.JSONFormatter)
-	//logger = log.New(F, DefaultPrefix, log.LstdFlags)
+	//Logger.Formatter = new(logrus.JSONFormatter)
+	//Logger = log.New(F, DefaultPrefix, log.LstdFlags)
 }
 
 // GetLogger Logger
 func GetLogger() *logrus.Logger {
-	return logger
+	return Logger
 }
 
 //- debug：没问题，就看看堆栈
 func Debugln(args ...interface{}) {
-	logger.Debugln(args)
+	Logger.Debugln(args)
 }
 
 //- Info：提示一切正常
 func Infoln(args ...interface{}) {
-	logger.Infoln(args)
+	Logger.Infoln(args)
 }
 
 //- Warn：记录一下，某事又发生了
 func Warnln(args ...interface{}) {
-	logger.Warnln(args)
+	Logger.Warnln(args)
 }
 
 //- Error：跟遇到的用户说对不起，可能有bug
 func Errorln(args ...interface{}) {
-	logger.Errorln(args)
+	Logger.Errorln(args)
 
 }
 
 //- Fatal：网站挂了，或者极度不正常
 func Fatalln(args ...interface{}) {
-	logger.Fatalln(args)
+	Logger.Fatalln(args)
 }
 
 //func setPrefix(level Level) {
