@@ -1,6 +1,11 @@
 # go-tools
 
-## 此项目记录了，自己日常用的工具类.如果对您有些帮助，请给个star支持下.谢谢咯.
+[![Release](https://img.shields.io/github/release/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/releases)
+[![GitHub license](https://img.shields.io/github/license/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/blob/master/LICENSE)
+
+
+
+## 此项目封装了日常使用的工具.如果对您有些帮助，请给个[![GitHub stars](https://img.shields.io/github/stars/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/stargazers)支持下.谢谢咯.
 
 包含,功能
 - [mfile 文件](https://github.com/sun-wenming/go-tools/tree/master/mfile) 关于文件是否存在、权限、新建...验证图片后缀、验证图片大小
@@ -19,7 +24,7 @@
 
 ## TODO
 - 增加功能测试
-- 
+- 需要你的 [![GitHub issues](https://img.shields.io/github/issues/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/issues)
 
 
 ## 三方开源工具
