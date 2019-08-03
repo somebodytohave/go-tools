@@ -9,7 +9,7 @@
 
 包含,功能
 - [mfile 文件](https://github.com/sun-wenming/go-tools/tree/master/mfile) 关于文件是否存在、权限、新建...验证图片后缀、验证图片大小
-- [mgin gin返回封装](ttps://github.com/sun-wenming/go-tools/tree/master/mgin) 对于Gin框架返回数据,分页,的封装,使开发更加便捷.
+- [mgin gin返回封装](https://github.com/sun-wenming/go-tools/tree/master/mgin) 对于Gin框架返回数据,分页,的封装,使开发更加便捷.
 - [mgoogleauth 谷歌二次验证](https://github.com/sun-wenming/go-tools/tree/master/mgoogleauth) 谷歌的二次验证,类似于将军令.
 - [mjwt 生成](https://github.com/sun-wenming/go-tools/tree/master/mjwt) 使用密钥对生成防伪Token以及加密解密Token的内容.
 - [mencrypt aes 加密解密](https://github.com/sun-wenming/go-tools/tree/master/) aes 加密解密.
