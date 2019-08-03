@@ -5,7 +5,6 @@ import (
 	"github.com/sun-wenming/go-tools/mcode"
 	"github.com/sun-wenming/go-tools/mlog"
 	"github.com/sun-wenming/go-tools/mvalid"
-	"gopkg.in/go-playground/validator.v9"
 	"net/http"
 	"strings"
 )
@@ -50,7 +49,6 @@ func (g *Gin) ResponseSucNoData() {
 	})
 	return
 }
-
 
 // Response400 返回失败
 func (g *Gin) Response400(err error) {
@@ -125,11 +123,8 @@ func (g *Gin) ResponseFailValidParam(err error) {
 	return
 }
 
-
 // MarkError 将错误 存入日志
 func MarkError(v ...interface{}) {
-	if mlog.InitLog {
-		mlog.Errorln(v...)
-	}
+	mlog.GetLogger().Errorln(v...)
 	return
 }

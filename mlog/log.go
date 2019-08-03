@@ -4,7 +4,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/sun-wenming/go-tools/mfile"
 	"log"
-	"os"
 	"runtime"
 	"strconv"
 	"strings"
@@ -26,11 +25,10 @@ func Setup() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	// 输出到文件中
 	logger.SetOutput(f)
 	// 输出到控制台
-	logger.SetOutput(os.Stdout)
+	//logger.SetOutput(os.Stdout)
 
 	// 获取调用 日志的具体位置
 	logger.SetReportCaller(true)
@@ -60,33 +58,32 @@ func GetLogger() *logrus.Logger {
 
 //- debug：没问题，就看看堆栈
 func Debugln(args ...interface{}) {
-	logger.Debugln(args)
+	GetLogger().Debugln(args)
 }
 
 //- Info：提示一切正常
 func Infoln(args ...interface{}) {
-	logger.Infoln(args)
+	GetLogger().Infoln(args)
 }
 
 //- Warn：记录一下，某事又发生了
 func Warnln(args ...interface{}) {
-	logger.Warnln(args)
+	GetLogger().Warnln(args)
 }
 
 //- Error：跟遇到的用户说对不起，可能有bug
 func Errorln(args ...interface{}) {
-	logger.Errorln(args)
+	GetLogger().Errorln(args)
 
 }
 
 //- Fatal：网站挂了，或者极度不正常
 func Fatalln(args ...interface{}) {
-	logger.Fatalln(args)
+	GetLogger().Fatalln(args)
 }
 
 // If you wish to add the calling method as a field
 // 获取调用 日志的具体位置
 func SetReportCaller(reportCaller bool) {
-	logger.SetReportCaller(reportCaller)
+	GetLogger().SetReportCaller(reportCaller)
 }
-
