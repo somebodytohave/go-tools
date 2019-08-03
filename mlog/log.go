@@ -39,7 +39,7 @@ func Setup() {
 		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
 			s := strings.Split(f.Function, ".")
 			funcname := s[len(s)-1]
-			filename := f.File + ": " + funcname + "~" + strconv.Itoa(f.Line)
+			filename := f.File + ", func: " + funcname + "~" + strconv.Itoa(f.Line)
 			return "", filename
 		},
 	}
