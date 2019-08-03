@@ -1,6 +1,7 @@
 # go-tools
 
 [![Release](https://img.shields.io/github/release/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/releases)
+[![GitHub issues](https://img.shields.io/github/issues/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/issues)
 [![GitHub license](https://img.shields.io/github/license/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/blob/master/LICENSE)
 
 
