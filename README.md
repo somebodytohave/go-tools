@@ -33,8 +33,8 @@ go get github.com/sun-wenming/go-tools@v0.6.3
 ```
 
 ## TODO
+- 新功能建议 [![GitHub issues](https://img.shields.io/github/issues/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/issues)
 - 增加功能测试
-- 需要你的 [![GitHub issues](https://img.shields.io/github/issues/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/issues)
 
 
 ## 三方开源工具
