@@ -29,7 +29,7 @@
 
 @release [![Release](https://img.shields.io/github/release/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/releases) 
 ```
-go get github.com/sun-wenming/go-tools@v0.6.1
+go get github.com/sun-wenming/go-tools@v0.6.2
 ```
 
 ## TODO
