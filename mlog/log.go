@@ -3,7 +3,6 @@ package mlog
 import (
 	"github.com/sirupsen/logrus"
 	"github.com/sun-wenming/go-tools/mfile"
-	"log"
 	"runtime"
 	"strconv"
 	"strings"
@@ -17,18 +16,6 @@ var (
 func Setup() {
 	// Create a new instance of the logger. You can have any number of instances.
 	logger = logrus.New()
-	var err error
-	//You could set this to any `io.Writer` such as a file
-	filePath := getLogFilePath()
-	fileName := getLogFileName()
-	f, err := mfile.MustOpen(fileName, filePath)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// 输出到文件中
-	logger.SetOutput(f)
-	// 输出到控制台
-	//logger.SetOutput(os.Stdout)
 
 	// 获取调用 日志的具体位置
 	logger.SetReportCaller(true)
@@ -36,12 +23,27 @@ func Setup() {
 	formatter := &logrus.TextFormatter{
 		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
 			s := strings.Split(f.Function, ".")
-			funcname := s[len(s)-1]
-			filename := f.File + ", func: " + funcname + "~" + strconv.Itoa(f.Line)
+			funcName := s[len(s)-1]
+			filename := f.File + ", func: " + funcName + "~" + strconv.Itoa(f.Line)
 			return "", filename
 		},
 	}
 	logger.Formatter = formatter
+
+	var err error
+	//You could set this to any `io.Writer` such as a file
+	filePath := getLogFilePath()
+	fileName := getLogFileName()
+	f, err := mfile.MustOpen(fileName, filePath)
+	if err != nil {
+		logger.Errorln(err)
+	}
+	// 输出到文件中
+	logger.SetOutput(f)
+	// 输出到控制台
+	//logger.SetOutput(os.Stdout)
+
+
 
 	// TODO 增加 example_custom_caller_test https://github.com/sirupsen/logrus/blob/master/example_custom_caller_test.go
 
