@@ -43,8 +43,6 @@ func Setup() {
 	// 输出到控制台
 	//logger.SetOutput(os.Stdout)
 
-
-
 	// TODO 增加 example_custom_caller_test https://github.com/sirupsen/logrus/blob/master/example_custom_caller_test.go
 
 	//logger = log.New(F, DefaultPrefix, log.LstdFlags)
@@ -82,6 +80,42 @@ func Errorln(args ...interface{}) {
 //- Fatal：网站挂了，或者极度不正常
 func Fatalln(args ...interface{}) {
 	GetLogger().Fatalln(args)
+}
+
+
+//- debug：没问题，就看看堆栈
+func DebuglnErr(err error) {
+	if err != nil {
+		GetLogger().Debugln(err)
+	}
+}
+
+//- Info：提示一切正常
+func InfolnErr(err error) {
+	if err != nil {
+		GetLogger().Infoln(err)
+	}
+}
+
+//- Warn：记录一下，某事又发生了
+func WarnlnErr(err error) {
+	if err != nil {
+		GetLogger().Warningln(err)
+	}
+}
+
+//- Error：跟遇到的用户说对不起，可能有bug
+func ErrorlnErr(err error) {
+	if err != nil {
+		GetLogger().Errorln(err)
+	}
+}
+
+//- Fatal：网站挂了，或者极度不正常
+func FatallnlErr(err error) {
+	if err != nil {
+		GetLogger().Fatalln(err)
+	}
 }
 
 // If you wish to add the calling method as a field
