@@ -6,7 +6,10 @@
 [![GitHub license](https://img.shields.io/github/license/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/blob/master/LICENSE)
 
 
-## 此项目封装了日常使用的工具.如果对您有些帮助，请给个[![GitHub stars](https://img.shields.io/github/stars/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/stargazers)支持下.谢谢咯.
+> 此项目封装了日常开发用到的工具.如果对您有些帮助，为了使项目更完善<br>
+[![GitHub issues](https://img.shields.io/github/issues/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/issues) 好的建议或修复<br>
+[![GitHub stars](https://img.shields.io/github/stars/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/stargazers)支持下.
+谢谢咯.
 
 ## 目录
 - [安装](#安装)
@@ -35,8 +38,8 @@ go get github.com/sun-wenming/go-tools@上方版本号
 ```
 
 ## TODO
-- 新功能建议 [![GitHub issues](https://img.shields.io/github/issues/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/issues)
 - 增加功能Demo
+- 新功能建议 [![GitHub issues](https://img.shields.io/github/issues/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/issues)
 
 
 ## 三方开源工具
