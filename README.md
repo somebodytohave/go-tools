@@ -8,7 +8,7 @@
 ## 此项目封装了日常使用的工具.如果对您有些帮助，请给个[![GitHub stars](https://img.shields.io/github/stars/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/stargazers)支持下.谢谢咯.
 
 ## 目录
-- [安装](安装)
+- [安装](##安装)
 - 功能
     - [mfile 文件](https://github.com/sun-wenming/go-tools/tree/master/mfile) 关于文件是否存在、权限、新建...验证图片后缀、验证图片大小
     - [mgin gin返回封装](https://github.com/sun-wenming/go-tools/tree/master/mgin) 对于Gin框架返回数据,分页,的封装,使开发更加便捷.
@@ -24,12 +24,13 @@
     - [mtime 时间处理](https://github.com/sun-wenming/go-tools/tree/master/mtime) 时间戳生成...
     - [mvalid 参数与正则验证](https://github.com/sun-wenming/go-tools/tree/master/mvalid) ...
 - [TODO](#TODO)
+- [三方开源工具](##三方开源工具)
 
 ## 安装
 
 @release [![Release](https://img.shields.io/github/release/sun-wenming/go-tools.svg?style=plastic)](https://github.com/sun-wenming/go-tools/releases) 
 ```
-go get github.com/sun-wenming/go-tools@v0.6.3
+go get github.com/sun-wenming/go-tools@上方版本号
 ```
 
 ## TODO
