@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
+	"github.com/bwmarrin/snowflake"
 	"math/rand"
 	"time"
 )
@@ -25,7 +26,7 @@ func GetRandomString(length int) string {
 	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	bytes := []byte(str)
 	var result []byte
-	rand.Seed(time.Now().UnixNano()+ int64(rand.Intn(100)))
+	rand.Seed(time.Now().UnixNano() + int64(rand.Intn(100)))
 	for i := 0; i < length; i++ {
 		result = append(result, bytes[rand.Intn(len(bytes))])
 	}
@@ -37,7 +38,7 @@ func GetRandomBase32String(length int) string {
 	str := "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
 	bytes := []byte(str)
 	var result []byte
-	rand.Seed(time.Now().UnixNano()+ int64(rand.Intn(100)))
+	rand.Seed(time.Now().UnixNano() + int64(rand.Intn(100)))
 	for i := 0; i < length; i++ {
 		result = append(result, bytes[rand.Intn(len(bytes))])
 	}
@@ -48,5 +49,20 @@ func GetRandomBase32String(length int) string {
 func GetRandomCode() string {
 	rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
 	vcode := fmt.Sprintf("%06v", rnd.Int31n(1000000))
-	return (vcode)
+	return vcode
+}
+
+var snowflakeNode *snowflake.Node
+
+func SetNode(node int64) error {
+	newNode, err := snowflake.NewNode(node)
+	snowflakeNode = newNode
+	return err
+}
+
+func GetRandomInt64ID() int64 {
+	if snowflakeNode == nil {
+		_ = SetNode(1)
+	}
+	return snowflakeNode.Generate().Int64()
 }
