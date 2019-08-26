@@ -46,3 +46,4 @@ go get github.com/sun-wenming/go-tools@上方版本号
 - 类型转换 [cast](https://github.com/spf13/cast)
 - 时间工具 [now](https://github.com/jinzhu/now) 
 - 定时任务 [cron](https://github.com/robfig/cron)
+- 唯一ID [sonyflake](https://github.com/sony/sonyflake)

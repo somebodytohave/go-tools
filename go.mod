@@ -3,7 +3,6 @@ module github.com/sun-wenming/go-tools
 go 1.12
 
 require (
-	github.com/bwmarrin/snowflake v0.3.0 // indirect
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-playground/locales v0.12.1
 	github.com/go-playground/universal-translator v0.16.0
