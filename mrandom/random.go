@@ -32,6 +32,18 @@ func GetRandomString(length int) string {
 	return string(result)
 }
 
+// GetRandomString 生成随机数字字符串
+func GetRandomNumString(length int) string {
+	str := "0123456789"
+	bytes := []byte(str)
+	var result []byte
+	rand.Seed(time.Now().UnixNano() + int64(rand.Intn(100)))
+	for i := 0; i < length; i++ {
+		result = append(result, bytes[rand.Intn(len(bytes))])
+	}
+	return string(result)
+}
+
 //GetRandomBase32String 生成base32随机 密钥
 func GetRandomBase32String(length int) string {
 	str := "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"
