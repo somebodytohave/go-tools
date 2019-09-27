@@ -131,6 +131,15 @@ func GetCaller(skip int) string {
 	frame, _ := frames.Next()
 	s := strings.Split(frame.Function, ".")
 	funcName := s[len(s)-1]
-	filename := frame.File + ", func: " + funcName + "~" + strconv.Itoa(frame.Line)
+	filename := getFileName(frame.File) + ", func: " + funcName + "~" + strconv.Itoa(frame.Line)
 	return filename
+}
+
+// getPackageName reduces a fully qualified function name to the package name
+// There really ought to be to be a better way...
+func getFileName(path string) string {
+	//lastPeriod := strings.LastIndex(f, ".")
+	lastSlash := strings.LastIndex(path, "/") + 1
+	path = path[lastSlash:]
+	return path
 }
