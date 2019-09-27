@@ -17,19 +17,6 @@ func Setup() {
 	// Create a new instance of the logger. You can have any number of instances.
 	logger = logrus.New()
 
-	// 获取调用 日志的具体位置
-	logger.SetReportCaller(true)
-	// 被调用者的 方法名称 与 行数
-	formatter := &logrus.TextFormatter{
-		CallerPrettyfier: func(f *runtime.Frame) (string, string) {
-			s := strings.Split(f.Function, ".")
-			funcName := s[len(s)-1]
-			filename := f.File + ", func: " + funcName + "~" + strconv.Itoa(f.Line)
-			return "", filename
-		},
-	}
-	logger.Formatter = formatter
-
 	var err error
 	//You could set this to any `io.Writer` such as a file
 	filePath := getLogFilePath()
@@ -82,7 +69,6 @@ func Fatalln(args ...interface{}) {
 	GetLogger().Fatalln(args)
 }
 
-
 //- debug：没问题，就看看堆栈
 func DebuglnErr(err error) {
 	if err != nil {
@@ -121,5 +107,30 @@ func FatallnlErr(err error) {
 // If you wish to add the calling method as a field
 // 获取调用 日志的具体位置
 func SetReportCaller(reportCaller bool) {
+	if reportCaller {
+		// 被调用者的 方法名称 与 行数
+		formatter := &logrus.TextFormatter{
+			CallerPrettyfier: func(f *runtime.Frame) (string, string) {
+				s := strings.Split(f.Function, ".")
+				funcName := s[len(s)-1]
+				filename := f.File + ", func: " + funcName + "~" + strconv.Itoa(f.Line)
+				return "", filename
+			},
+		}
+		GetLogger().Formatter = formatter
+	}
 	GetLogger().SetReportCaller(reportCaller)
+}
+
+// getCaller retrieves the name of the first non-logrus calling function
+// 获取调用者的文件、方法名、行数。
+func GetCaller(skip int) string {
+	pcs := make([]uintptr, 1)
+	depth := runtime.Callers(1+skip, pcs)
+	frames := runtime.CallersFrames(pcs[:depth])
+	frame, _ := frames.Next()
+	s := strings.Split(frame.Function, ".")
+	funcName := s[len(s)-1]
+	filename := frame.File + ", func: " + funcName + "~" + strconv.Itoa(frame.Line)
+	return filename
 }
