@@ -125,7 +125,8 @@ func (g *Gin) ResponseFailValidParam(err error) {
 }
 
 // MarkError 将错误 存入日志
-func MarkError(v ...interface{}) {
-	mlog.GetLogger().Errorln(v...)
+func MarkError(v string) {
+	caller := mlog.GetCaller(3)
+	mlog.GetLogger().Errorln(v, "caller: "+caller)
 	return
 }
