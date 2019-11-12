@@ -28,10 +28,11 @@ func Compare(inputPwd, hashPwd string) error {
 	return err
 }
 
+// 参考 https://astaxie.gitbooks.io/build-web-application-with-golang/zh/09.6.html
 var key = []byte("32-bytes-key-sui-ji-fhaso!nislfg")
 
 // AesEncrypt Aes 加密
-func AesEncrypt(plaintext []byte) ([]byte, error) {
+func AesEncrypt(plaintext, key []byte) ([]byte, error) {
 	c, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
@@ -50,7 +51,7 @@ func AesEncrypt(plaintext []byte) ([]byte, error) {
 }
 
 // AesDecrypt Aes 解密
-func AesDecrypt(ciphertext []byte) ([]byte, error) {
+func AesDecrypt(ciphertext, key []byte) ([]byte, error) {
 	c, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
