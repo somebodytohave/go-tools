@@ -51,23 +51,24 @@ func (g *Gin) ResponseSucNoData() {
 	return
 }
 
-// Response400 返回失败
-func (g *Gin) Response400(err error) {
-	MarkError(err.Error())
+// Response400 返回失败, err记录日志错误,msg提示用户
+func (g *Gin) Response400(err error, msg string) {
+	if err != nil {
+		MarkError(err.Error())
+	}
 	g.C.JSON(http.StatusOK, gin.H{
 		"code": http.StatusBadRequest,
-		"msg":  err.Error(),
+		"msg":  msg,
 		"data": nil,
 	})
 	return
 }
 
-// Response400Str 返回自定义字错误内容
-func (g *Gin) Response400Str(errStr string) {
-	MarkError(errStr)
+// Response400Str msg提示用户
+func (g *Gin) Response400Str(msg string) {
 	g.C.JSON(http.StatusOK, gin.H{
-		"code": mcode.ERROR400,
-		"msg":  errStr,
+		"code": http.StatusBadRequest,
+		"msg":  msg,
 		"data": nil,
 	})
 	return
@@ -110,12 +111,13 @@ func (g *Gin) ResponseFailValidParam(err error) {
 	// 替换字段
 	if err == nil {
 		msg = strings.Replace(msg, jsonKey, fieldName, -1)
+	} else {
+		MarkError(msg)
 	}
 
 	//jsonKey = jsonKey[2 : len(jsonKey)-2]
 	//fmt.Println(jsonKey, ":", msg)
 
-	MarkError(msg)
 	g.C.JSON(http.StatusOK, gin.H{
 		"code": mcode.ERROR400,
 		"msg":  msg,
