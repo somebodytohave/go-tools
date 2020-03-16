@@ -1,4 +1,4 @@
-package httpclient
+package mhttpclient
 
 import (
 	"bytes"
@@ -29,6 +29,16 @@ type file struct {
 	path     string
 }
 
+//NewRequestGet 新的Request指针
+func NewRequestGet(urlString string) *Request {
+	return NewRequest("GET", urlString)
+}
+
+//NewRequestPost 新的Request指针
+func NewRequestPost(urlString string) *Request {
+	return NewRequest("POST", urlString)
+}
+
 //NewRequest 新的Request指针
 func NewRequest(method, urlString string) *Request {
 	var r = &Request{}
@@ -38,6 +48,7 @@ func NewRequest(method, urlString string) *Request {
 	r.header = http.Header{}
 	r.Client = http.DefaultClient
 	r.SetContentType("application/x-www-form-urlencoded")
+	//r.SetContentType("application/json")
 	return r
 }
 
