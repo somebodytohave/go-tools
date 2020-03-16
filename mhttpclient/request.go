@@ -34,6 +34,41 @@ func NewRequestGet(urlString string) *Request {
 	return NewRequest("GET", urlString)
 }
 
+//NewRequestGet 新的Request指针
+func NewRequestGet(urlString string) *Request {
+	return NewRequest("GET", urlString)
+}
+
+//NewRequestGetWithRes 新的Request指针
+func NewRequestGetWithRes(urlString string) (interface{}, error) {
+	var res interface{}
+	err := NewRequest("GET", urlString).Exec().Unmarshal(&res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+//NewRequestPostWithRes 新的Request指针
+func NewRequestPostWithRes(urlString string) (interface{}, error) {
+	var res interface{}
+	err := NewRequest("POST", urlString).Exec().Unmarshal(&res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+//NewRequestGetWithExec 新的Request指针
+func NewRequestGetWithExec(urlString string) *Response {
+	return NewRequest("GET", urlString).Exec()
+}
+
+//NewRequestPostWithExec 新的Request指针
+func NewRequestPostWithExec(urlString string) *Response {
+	return NewRequest("POST", urlString).Exec()
+}
+
 //NewRequestPost 新的Request指针
 func NewRequestPost(urlString string) *Request {
 	return NewRequest("POST", urlString)
