@@ -34,11 +34,6 @@ func NewRequestGet(urlString string) *Request {
 	return NewRequest("GET", urlString)
 }
 
-//NewRequestGet 新的Request指针
-func NewRequestGet(urlString string) *Request {
-	return NewRequest("GET", urlString)
-}
-
 //NewRequestGetWithRes 新的Request指针
 func NewRequestGetWithRes(urlString string) (interface{}, error) {
 	var res interface{}
