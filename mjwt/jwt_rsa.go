@@ -4,13 +4,14 @@ import (
 	"crypto/rsa"
 	"errors"
 	"fmt"
-	"github.com/dgrijalva/jwt-go"
 	"io/ioutil"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 type CustomClaims struct {
-	Data []byte `json:"data"`
+	Data      []byte `json:"data"`
 	ExtraData []byte `json:"extra_data"`
 	jwt.StandardClaims
 }
