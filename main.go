@@ -10,5 +10,4 @@ func main() {
 	mlog.Errorln("--")
 	mlog.FatallnlErr(nil)
 	mlog.Errorln("--")
-
 }

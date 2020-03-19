@@ -44,6 +44,15 @@ func NewRequestGetWithRes(urlString string) (interface{}, error) {
 	return res, nil
 }
 
+//NewRequestGetWithResData 新的Request指针
+func NewRequestGetWithResData(res interface{}, urlString string) error {
+	err := NewRequest("GET", urlString).Exec().Unmarshal(res)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 //NewRequestPostWithRes 新的Request指针
 func NewRequestPostWithRes(urlString string) (interface{}, error) {
 	var res interface{}
@@ -52,6 +61,15 @@ func NewRequestPostWithRes(urlString string) (interface{}, error) {
 		return nil, err
 	}
 	return res, nil
+}
+
+//NewRequestPostWithResData 新的Request指针
+func NewRequestPostWithResData(res interface{}, urlString string) error {
+	err := NewRequest("POST", urlString).Exec().Unmarshal(res)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 //NewRequestGetWithExec 新的Request指针
