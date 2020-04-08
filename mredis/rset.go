@@ -25,3 +25,8 @@ func GetSets(key string) ([]string, error) {
 func ExistSetMember(key string, member interface{}) (bool, error) {
 	return RedisClient.SIsMember(key, member).Result()
 }
+
+// 移除集合中的一个或多个成员元素，不存在的成员元素会被忽略。
+func RemoveSetMembers(key string, members ...interface{}) error {
+	return RedisClient.SRem(key, members...).Err()
+}
