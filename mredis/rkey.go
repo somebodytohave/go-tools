@@ -42,21 +42,21 @@ func ExpireAtKey(key string, tm time.Time) error {
 }
 
 // key 是否存在
-func ExistKeys(keys ...string) error {
-	_, err := ExistKeysRes(keys...)
-	return err
+func ExistKeys(keys ...string) (bool, error) {
+	_, b, err := ExistKeysRes(keys...)
+	return b, err
 }
 
 // key 是否存在
-func ExistKeysRes(keys ...string) (int64, error) {
+func ExistKeysRes(keys ...string) (int64, bool, error) {
 	result, err := RedisClient.Exists(keys...).Result()
 	if err != nil {
-		return 0, err
+		return 0, false, err
 	}
 	if result < 1 {
-		return 0, errors.New("key is not exist")
+		return 0, false, nil
 	}
-	return result, nil
+	return result, true, nil
 }
 
 func DeleteKeys(keys ...string) error {

@@ -8,6 +8,6 @@ func LimitRate(key string, expTime time.Duration) bool {
 	if existKeys {
 		return false
 	}
-	_, _ = SetKeyValue(key, "limit_rate", expTime)
+	_ = SetKeyValue(key, "limit_rate", expTime)
 	return true
 }

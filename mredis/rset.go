@@ -8,10 +8,10 @@ func SetSet(key string, members ...interface{}) error {
 }
 
 // 带有过期时间的 Set
-func SetSetExpire(key string, expiration time.Duration, members ...interface{}) (bool, error) {
+func SetSetExpire(key string, expiration time.Duration, members ...interface{}) error {
 	err := RedisClient.SAdd(key, members...).Err()
 	if err != nil {
-		return false, err
+		return err
 	}
 	return ExpireKey(key, expiration)
 }
