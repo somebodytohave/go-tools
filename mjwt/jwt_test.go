@@ -40,7 +40,7 @@ func main() {
 
 func GenToken(data string) (string, error) {
 	customClaims := CustomClaims{Data: []byte(data)}
-	token, err := GenRSA256TokenWithFileName(customClaims, priKeyName, pubKeyName)
+	token, err := GenRSA256TokenByFile(customClaims, priKeyName, pubKeyName)
 	if err != nil {
 		return "", err
 	}
@@ -48,7 +48,7 @@ func GenToken(data string) (string, error) {
 }
 
 func ParseToken(token string) (*CustomClaims, error) {
-	claims, err := ParseRAS256TokenFileName(token, priKeyName, pubKeyName)
+	claims, err := ParseRAS256TokenByFile(token, priKeyName, pubKeyName)
 	if err != nil {
 		return nil, err
 	}
